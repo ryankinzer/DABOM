@@ -70,7 +70,7 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
     mutate(JOSEPC = JOC * JOSEPC) %>%
     mutate_at(vars(IR1_bb, HORS3C, CMP, LSHEEF, BSC, IR3),
               funs(. * IR1)) %>%
-    mutate_at(vars(IR3_bb, FREEZC, CZY, MAHOGC, IR4),
+    mutate_at(vars(IR3_bb, FREEZC, GCM, CZY, MAHOGC, IR4),
               funs(. * IR3)) %>%
     mutate(IML = IR4 * IML,
            IR5 = IML * IR5) %>%

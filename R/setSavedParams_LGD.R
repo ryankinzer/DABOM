@@ -131,6 +131,8 @@ setSavedParams_LGD = function(time_varying = F) {
                 'LSHEEF_p',
                 'IR3A0_p',
                 'IR3B0_p',
+                'GCMA0_p',
+                'GCMB0_p',
                 'CZYA0_p',
                 'CZYB0_p',
                 'FREEZC_p',

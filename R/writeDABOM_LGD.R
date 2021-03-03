@@ -130,6 +130,8 @@ model{
   CZYA0_p ~ dbeta(1,1)
   CZYB0_p ~ dbeta(1,1)
   FREEZC_p <- 1 # assume perfect detection
+  GCMA0_p ~ dbeta(1,1)
+  GCMB0_p ~ dbeta(1,1)
   IR4A0_p ~ dbeta(1,1)
   IR4B0_p ~ dbeta(1,1)
   MAHOGC_p <- 1 # assume perfect detection
@@ -569,7 +571,7 @@ model{
   pMat_Imnaha[2,(n.pops.Imnaha[1]+1)] <- 0 #set the "not there" bin to prob = 0
 
   # upper Imnaha (above IR3)
-  # 7 bins: mainstem (1), FREEZC (2), CZY (3), MAHOGC (4), IR4 (5), and not seen (6)
+  # 7 bins: mainstem (1), FREEZC (2), GCM (3), CZY (4), MAHOGC (5), IR4 (6), and not seen (7)
   p_pop_UppImn[1:n.pops.Imnaha[2]] ~ ddirch(imnUp_dirch_vec)
 
   # set up a matrix that deals with yes/no in the tributary or not
@@ -650,31 +652,35 @@ model{
   # Freezeout Creek weir
   ImnahaRiver[i,11] ~ dbern(FREEZC_p * catexp_ImnUp[i, 2])
 
+  # Grouse Creek (GCM)
+  ImnahaRiver[i,12] ~ dbern(GCMB0_p * catexp_ImnUp[i, 3]) # change this and others
+  ImnahaRiver[i,13] ~ dbern(GCMA0_p * catexp_ImnUp[i, 3])
+
   # Crazy Creek (CZY)
-  ImnahaRiver[i,12] ~ dbern(CZYB0_p * catexp_ImnUp[i, 3])
-  ImnahaRiver[i,13] ~ dbern(CZYA0_p * catexp_ImnUp[i, 3])
+  ImnahaRiver[i,14] ~ dbern(CZYB0_p * catexp_ImnUp[i, 4])
+  ImnahaRiver[i,15] ~ dbern(CZYA0_p * catexp_ImnUp[i, 4])
 
   # Mahogany Creek weir
-  ImnahaRiver[i,14] ~ dbern(MAHOGC_p * catexp_ImnUp[i, 4])
+  ImnahaRiver[i,16] ~ dbern(MAHOGC_p * catexp_ImnUp[i, 5])
 
   # IR4
-  ImnahaRiver[i,15] ~ dbern(IR4B0_p * catexp_ImnUp[i, 5])
-  ImnahaRiver[i,16] ~ dbern(IR4A0_p * catexp_ImnUp[i, 5])
+  ImnahaRiver[i,17] ~ dbern(IR4B0_p * catexp_ImnUp[i, 6])
+  ImnahaRiver[i,18] ~ dbern(IR4A0_p * catexp_ImnUp[i, 6])
 
   # Imnaha weir
-  ImnahaRiver[i,17] ~ dbern(IMLB0_p * z_iml[i])
-  ImnahaRiver[i,18] ~ dbern(IMLA0_p * z_iml[i])
-  ImnahaRiver[i,19] ~ dbern(IMNAHW_p * z_iml[i])
+  ImnahaRiver[i,19] ~ dbern(IMLB0_p * z_iml[i])
+  ImnahaRiver[i,20] ~ dbern(IMLA0_p * z_iml[i])
+  ImnahaRiver[i,21] ~ dbern(IMNAHW_p * z_iml[i])
 
   # IR5
-  ImnahaRiver[i,20] ~ dbern(IR5B0_p * z_ir5[i])
-  ImnahaRiver[i,21] ~ dbern(IR5A0_p * z_ir5[i])
+  ImnahaRiver[i,22] ~ dbern(IR5B0_p * z_ir5[i])
+  ImnahaRiver[i,23] ~ dbern(IR5A0_p * z_ir5[i])
 
   # Gumboot Creek weir
-  ImnahaRiver[i,22] ~ dbern(GUMBTC_p * catexp_ImnWeir[i, 2])
+  ImnahaRiver[i,24] ~ dbern(GUMBTC_p * catexp_ImnWeir[i, 2])
 
   # Dry Creek
-  ImnahaRiver[i,23] ~ dbern(DRY2C_p * catexp_ImnWeir[i, 3])
+  ImnahaRiver[i,25] ~ dbern(DRY2C_p * catexp_ImnWeir[i, 3])
 
 
   } #ends the ifish loop started at the top of this section

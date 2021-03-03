@@ -238,16 +238,20 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   a_ImnUp_init[,2] = dabom_list$ImnahaRiver %>%
     select(FREEZC) %>%
     apply(1, max)
-  # CZY
+  # GCM
   a_ImnUp_init[,3] = dabom_list$ImnahaRiver %>%
+    select(GCMB0, BCMA0) %>%
+    apply(1, max)
+  # CZY
+  a_ImnUp_init[,4] = dabom_list$ImnahaRiver %>%
     select(matches('CZY')) %>%
     apply(1, max)
   # MAHOGC
-  a_ImnUp_init[,4] = dabom_list$ImnahaRiver %>%
+  a_ImnUp_init[,5] = dabom_list$ImnahaRiver %>%
     select(MAHOGC) %>%
     apply(1, max)
   # IR4
-  a_ImnUp_init[,5] = dabom_list$ImnahaRiver %>%
+  a_ImnUp_init[,6] = dabom_list$ImnahaRiver %>%
     select(IR4B0:DRY2C) %>%
     apply(1, max)
   # upper Imnaha bb
