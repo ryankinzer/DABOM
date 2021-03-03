@@ -153,6 +153,14 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   # HLM bb
   a_HLM_init[,1] = ifelse(apply(a_HLM_init[,-1], 1, max) == 0,
                           1, 0)
+  # EFPW
+  z_efpw_init = dabom_list$Potlatch %>%
+    select(EFPW) %>%
+    apply(1, max)
+  # EPR
+  z_epr_init = dabom_list$Potlatch %>%
+    select(EPRB0, EPRA0) %>%
+    apply(1, max)
 
   # Fish Creek
   z_fistrp_init = dabom_list$Lochsa %>%
@@ -471,6 +479,8 @@ setInitialValues_LGD = function(dabom_list = NULL) {
                       z_tpj = z_tpj_init,
                       z_acb = z_acb_init,
                       z_web = z_web_init,
+                      z_efpw = z_efpw_init,
+                      z_epr = z_epr_init,
                       z_josepc = z_josepc_init,
                       z_fistrp = z_fistrp_init,
                       z_iml = z_iml_init,

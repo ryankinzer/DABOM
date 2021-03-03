@@ -67,6 +67,8 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
               funs(. * KHS)) %>%
     mutate_at(vars(HLM_bb, POTREF, POTRWF),
               funs(. * HLM)) %>%
+    mutate(EFPW = POTREF * EFPW,
+           EPR = EPR * EFPW) %>%
     mutate(FISTRP = LRL * FISTRP) %>%
     mutate(JOSEPC = JOC * JOSEPC) %>%
     mutate_at(vars(IR1_bb, HORS3C, CMP, LSHEEF, BSC, IR3),

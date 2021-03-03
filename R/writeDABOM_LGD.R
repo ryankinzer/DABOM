@@ -63,6 +63,9 @@ model{
   HLMA0_p ~ dbeta(1,1)
   HLMB0_p ~ dbeta(1,1)
   POTREF_p <- 1 # assume perfect detection
+  EFPW_p ~ dbeta(1,1)
+  EPRB0_p ~ dbeta(1,1)
+  EPRA0_p ~ dbeta(1,1)
   POTRWF_p <- 1 # assume perfect detection
   KHSA0_p ~ dbeta(1,1)
   KHSB0_p ~ dbeta(1,1)
@@ -400,7 +403,7 @@ model{
   ####################################################
   #   Now we deal with Lapwai
   ####################################################
-  # 4 bins: mainstem (1), MIS (2), SWT (3), and not seen (4)
+  # 4 bins: mainstem (1), SWT(2), MIS (3), and not seen (4)
 
   p_pop_Lapwai[1:n.pops.Lapwai] ~ ddirch(lap_dirch_vec) # Dirichlet for probs for going to bins
 
@@ -458,6 +461,9 @@ model{
   pMat_Potlatch[2,1:n.pops.Potlatch[1]] <- p_pop_Potlatch # when in trib, >0 probs of being in sub areas
   pMat_Potlatch[2,(n.pops.Potlatch[1]+1)] <- 0 #set the "not there" bin to prob = 0
 
+  phi_efpw ~ dbeta(1,1)  # probability of moving efpw
+  phi_epr ~ dbeta(1,1) # prob of moving past epr
+
   # 3 bins above KHS: mainstem (1), BIGBEC (2) and LBEARC (3)
 
   p_pop_KHS[1:n.pops.Potlatch[2]] ~ ddirch(khs_dirch_vec) # Dirichlet for probs for going to bins
@@ -500,6 +506,9 @@ model{
       catexp_HLM[i,j] <- equals(a_HLM[i],j) #equals(x,y) is a test for equality, returns [1,0]
     }
 
+    z_efpw[i] ~ dbern(catexp_HLM[i,2] * phi_efpw)
+    z_epr[i] ~ dbern(z_efpw[i] * phi_epr)
+
   #------------------------------------
     # OBSERVATION part in Potlatch
     #------------------------------------
@@ -520,12 +529,16 @@ model{
     Potlatch[i,7] ~ dbern(PCMA0_p * catexp_Pot[i, 3])
 
     # Helmer array (HLM)
-    Potlatch[i,9] ~ dbern(HLMB0_p * catexp_Pot[i, 4])
-    Potlatch[i,10] ~ dbern(HLMA0_p * catexp_Pot[i, 4])
+    Potlatch[i,12] ~ dbern(HLMB0_p * catexp_Pot[i, 4])
+    Potlatch[i,13] ~ dbern(HLMA0_p * catexp_Pot[i, 4])
 
     # above HLM
     Potlatch[i,8] ~ dbern(POTREF_p * catexp_HLM[i, 2])
-    Potlatch[i,11] ~ dbern(POTRWF_p * catexp_HLM[i, 3])
+    Potlatch[i,9] ~ dbern(EFPW_p * z_efpw[i])
+    Potlatch[i,10] ~ dbern(EPRB0_p * z_epr[i])
+    Potlatch[i,11] ~ dbern(EPRA0_p * z_epr[i])
+
+    Potlatch[i,14] ~ dbern(POTRWF_p * catexp_HLM[i, 3])
 
   } #ends the ifish loop started at the top of this section
 
