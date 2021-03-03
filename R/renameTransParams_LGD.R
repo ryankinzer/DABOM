@@ -16,7 +16,7 @@ renameTransParams_LGD = function(param_vec = NULL) {
   stopifnot(!is.null(param_vec))
 
   param_vec[grep('phi', param_vec)] = stringr::str_replace(toupper(param_vec[grep('phi', param_vec)]), 'PHI_', '')
-  param_vec[grep('p_pop_main', param_vec)] = c("LTR", "PENAWC", "ALMOTC", "ALPOWC", "ACM", "TENMC2", "LAP", "JUL", "JOC", "COC", "IR1", "LC1", "SC1", "WEN", "CLC", "LRL", "SW1", "LOOKGC", "WR1", "UGR", "RAPH", "SFG", "PCA", "TAY", "NFS", "CRC", "LLR", "USE","BRC", 'Main_bb')
+  param_vec[grep('p_pop_main', param_vec)] = c("LTR", "PENAWC", "ALMOTC", "ALPOWC", "ACM", "TENMC2", "LAP", "JUL", "JOC", "COC", "IR1", "LC1", "SC1", "WEN", "CLC", "LRL", "SW1", "LOOKGC", "WR1", "UGR", "RAPH", "SFG", "PCA", "TAY", "NFS", "CRC", "LLR", "USE", "BRC", "MAR", 'Main_bb')
   param_vec[grep('p_pop_Asotin', param_vec)] = c('ACM_bb', 'GEORGC', 'ASOTIC')
   param_vec[grep('p_pop_AsoUpp', param_vec)] = c('ACB_bb', 'CCA', 'AFC')
   param_vec[grep('p_pop_Lapwai', param_vec)] = c('LAP_bb', 'MIS', 'SWT')

@@ -165,6 +165,9 @@ model{
   TAYA0_p ~ dbeta(1,1)
   TAYB0_p ~ dbeta(1,1)
 
+  MARA0_p ~ dbeta(1,1)
+  MARB0_p ~ dbeta(1,1)
+
   NFSA0_p ~ dbeta(1,1)
   NFSB0_p ~ dbeta(1,1)
 
@@ -221,7 +224,7 @@ model{
   ##################################################################
   # Set up initial branching structure after leaving Lower Granite
   ##################################################################
-  # 27 bins: 	Tucannon (1), Penawawa (2), Almota (3), Alpowa (4), Asotin (5), Ten Mile Cr. (6), Lapwai (7), Potlatch (8), Joseph Creek (9), Cow Creek (10), Imnaha (11), Lolo (12), SF Clearwater (13), Wenaha River (14), Clear Creek (15), Lochsa (16), Selway (17), Lookingglass Creek (18), Wallowa (19),  Grande Ronde (20), Rapid River (21), South Fork Salmon (22), Panther Creek (23), Big Creek (24), North Fork Salmon (25), Carmen Creek (26), Lemhi (27), Upper Salmon (28), Bear Valley (29) Not Seen (27)
+  # 31 bins: 	Tucannon (1), Penawawa (2), Almota (3), Alpowa (4), Asotin (5), Ten Mile Cr. (6), Lapwai (7), Potlatch (8), Joseph Creek (9), Cow Creek (10), Imnaha (11), Lolo (12), SF Clearwater (13), Wenaha River (14), Clear Creek (15), Lochsa (16), Selway (17), Lookingglass Creek (18), Wallowa (19),  Grande Ronde (20), Rapid River (21), South Fork Salmon (22), Panther Creek (23), Big Creek (24), North Fork Salmon (25), Carmen Creek (26), Lemhi (27), Upper Salmon (28), Bear Valley (29), Marsh Creek (30), Not Seen (31)
 
   # set probability to any main bin that saw NO fish to 0
   p_pop_main ~ ddirch(main_dirch_vec) # Dirichlet for probs for going to n.pops bins
@@ -1225,6 +1228,18 @@ model{
     BearValley[i,1] ~ dbern( BRC_p * catexp[i,29] )
 
   }
+
+  ####################################################
+  #   Now we deal with Marsh Creek
+  ####################################################
+  # only have to worry about observation piece
+  for (i in 1:n.fish) {
+
+    # first site (MAR)
+    MarshCreek[i,1] ~ dbern( MARB0_p * catexp[i,30] )
+    MarchCreek[i,2] ~ dbern( MARA0_p * catexp[i,30] )
+  }
+
 
 } # ends model file
 '

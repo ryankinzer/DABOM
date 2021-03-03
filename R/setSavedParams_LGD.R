@@ -156,6 +156,8 @@ setSavedParams_LGD = function(time_varying = F) {
                 'LAKEC_p',
                 'TAYA0_p',
                 'TAYB0_p',
+                'MARA0_p',
+                'MARB0_p',
                 'PCAB0_p',
                 'PCAA0_p',
                 'NFSA0_p',
