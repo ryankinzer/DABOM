@@ -163,12 +163,17 @@ setInitialValues_LGD = function(dabom_list = NULL) {
 
   # Wallowa
   a_Wal_init[,ncol(a_Wal_init)] = 1 - apply(dabom_list$Wallowa, 1, max, na.rm = T) # not in Wallowa
-  # BCANF
+  # MR1
   a_Wal_init[,2] = dabom_list$Wallowa %>%
+    select(MR1B0, MR1A0) %>%
+    apply(1, max)
+
+  # BCANF
+  a_Wal_init[,3] = dabom_list$Wallowa %>%
     select(BCANF) %>%
     apply(1, max)
   # WR2
-  a_Wal_init[,3] = dabom_list$Wallowa %>%
+  a_Wal_init[,4] = dabom_list$Wallowa %>%
     select(WR2B0, WR2A0, LOSTIW, WALH) %>%
     apply(1, max)
   # Wallowa bb

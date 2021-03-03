@@ -15,11 +15,13 @@ setBranchNums_LGD = function() {
                        n.pops.Asotin = c(3,3),     # number of branches after ACM, then number of branches after ACB
                        n.pops.Lapwai = 3,				   # number of bins in Lapwai branch
                        n.pops.Potlatch = c(4,3,3), # number of bins in Potlatch branch, then above KHS, then above HLM
-                       n.pops.Wallowa = c(3,3),         # number of initial bins in Wallowa branch
+                       n.pops.Wallowa = c(4,3),    # number of initial bins in Wallowa branch
                        n.pops.UppGR = 3,           # number of initial bins in Grande Ronde branch
                        n.pops.Imnaha = c(6,5,3),   # number of initial bins in Imnaha branch, number of branches above IR3, number of branches above IR5
-                       n.pops.SFS = c(4,3),			       # number of initial bins in South Fork Salmon branch
+                       n.pops.SFS = c(4,3),			   # number of initial bins in South Fork Salmon branch
                        n.pops.Lemhi = c(7,8),		   # number of bins in lower and upper Lemhi branches
                        n.pops.UpSalm = 7)          # number of initial bins in Upper Salmon branch
+  # include gate in the count; for example, SFG, ZEN, KRS, ESS (4), and ESS, JOHNSC, YPP (3)
+  # WR1, MR1, BCANF, WR2 (4), and WR2, Lostine, WALH (3)
 
 }

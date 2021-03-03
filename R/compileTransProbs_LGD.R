@@ -42,7 +42,7 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
       select(-matches('p_pop_main'), first_week_pos)
   }
 
-  # change names of paramters
+  # change names of parameters
   names(trans_mat) = renameTransParams_LGD(names(trans_mat))
 
   # multiply some probabilities together
@@ -76,7 +76,7 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
            IR5 = IML * IR5) %>%
     mutate_at(vars(IR5_bb, GUMBTC, DRY2C),
               funs(. * IR5)) %>%
-    mutate_at(vars(WR1_bb, BCANF, WR2),
+    mutate_at(vars(WR1_bb, MR1, BCANF, WR2),
               funs(. * WR1)) %>%
     mutate_at(vars(LOSTIW, WALH),
               funs(. * WR2)) %>%

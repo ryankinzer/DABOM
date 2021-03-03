@@ -94,6 +94,8 @@ model{
   JOSEPC_p ~ dbeta(1,1)
 
   WR1_p ~ dbeta(1,1)
+  MR1B0_p ~ dbeta(1,1)
+  MR1A0_p ~ dbeta(1,1)
   BCANF_p <- 1 # assume perfect detection
   WR2B0_p ~ dbeta(1,1)
   WR2A0_p ~ dbeta(1,1)
@@ -781,7 +783,7 @@ model{
   ####################################################
   #   Now we deal with Wallowa
   ####################################################
-  # 5 bins: mainstem (1), BCANF (2), WR2 (3) and not seen (4)
+  # 5 bins: mainstem (1), MR1 (2), BCANF (3), WR2 (4) and not seen (5)
 
   p_pop_Wallowa[1:n.pops.Wallowa[1]] ~ ddirch(wal_dirch_vec) # Dirichlet for probs for going to bins
 
@@ -824,18 +826,22 @@ model{
     #first array (WR1)
     Wallowa[i,1] ~ dbern(WR1_p * max(catexp_Wal[i,1:(n.pops.Wallowa[1])]))
 
+    #MR1
+    Wallowa[i,2] ~ dbern(MR1B0_p * catexp_Wal[i,2])
+    Wallowa[i,3] ~ dbern(MR1A0_p * catexp_Wal[i,2])
+
     # BCANF
-    Wallowa[i,2] ~ dbern(BCANF_p * catexp_Wal[i, 2])
+    Wallowa[i,4] ~ dbern(BCANF_p * catexp_Wal[i, 3])
 
     # WR2
-    Wallowa[i,3] ~ dbern(WR2B0_p * catexp_Wal[i,3])
-    Wallowa[i,4] ~ dbern(WR2A0_p * catexp_Wal[i,3])
+    Wallowa[i,5] ~ dbern(WR2B0_p * catexp_Wal[i,4])
+    Wallowa[i,6] ~ dbern(WR2A0_p * catexp_Wal[i,4])
 
     # LOSTIW
-    Wallowa[i,5] ~ dbern(LOSTIW_p * catexp_WalUp[i, 2])
+    Wallowa[i,7] ~ dbern(LOSTIW_p * catexp_WalUp[i, 2])
 
     # WALH
-    Wallowa[i,6] ~ dbern(WALH_p * catexp_WalUp[i, 3])
+    Wallowa[i,8] ~ dbern(WALH_p * catexp_WalUp[i, 3])
 
 }
 

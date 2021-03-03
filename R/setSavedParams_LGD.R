@@ -104,6 +104,8 @@ setSavedParams_LGD = function(time_varying = F) {
                 'WENB0_p',
                 'WENA0_p',
                 'WR1_p',
+                'MR1B0_p',
+                'MR1A0_p',
                 'WR2B0_p',
                 'WR2A0_p',
                 'WALH_p',
