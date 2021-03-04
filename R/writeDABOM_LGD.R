@@ -39,8 +39,8 @@ model{
   MTR_p ~ dbeta(1,1)
   UTR_p ~ dbeta(1,1)
   TUCH_p <- 1 # assume perfect detection
-  TPJB0_p ~ dbeta(1,1)
-  TPJA0_p ~ dbeta(1,1)
+  #TPJB0_p ~ dbeta(1,1)
+  #TPJA0_p ~ dbeta(1,1)
 
   ALMOTC_p <- 1 # assume perfect detection
   ALPOWC_p <- 1 # assume perfect detection
@@ -260,7 +260,7 @@ model{
   phi_mtr ~ dbeta(1,1)  # probability of moving past MTR
   phi_utr ~ dbeta(1,1)  # probability of moving past UTR
   phi_tuch ~ dbeta(1,1)  # probability of moving past TUCH
-  phi_tpj ~ dbeta(1,1) # probabilities of moving past TPJ
+  #phi_tpj ~ dbeta(1,1) # probabilities of moving past TPJ
 
   for ( i in 1:n.fish ) {
     #----------------------------
@@ -275,7 +275,7 @@ model{
     # did the fish make it past TUCH & TFH?
     z_tuch[i] ~ dbern(z_utr[i] * phi_tuch)
 
-    z_tpj[i] ~ dbern(z_tuch[i] * phi_tpj)
+    #z_tpj[i] ~ dbern(z_tuch[i] * phi_tpj)
 
     #----------------------------
     # OBSERVATION part in Tucanon
@@ -289,9 +289,9 @@ model{
 
     Tucannon[i,4] ~ dbern(TUCH_p * z_tuch[i]) # did they go past TUCH & TFH?
 
-    Tucannon[i,5] ~ dbern(TJPB0_p * z_tpj[i])
+    #Tucannon[i,5] ~ dbern(TJPB0_p * z_tpj[i])
 
-    Tucannon[i,6] ~ dbern(TJPA0_p * z_tpj[i])
+    #Tucannon[i,6] ~ dbern(TJPA0_p * z_tpj[i])
 
   }  # ends the ifish loop started at the top of this section
 

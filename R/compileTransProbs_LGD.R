@@ -50,9 +50,10 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
     rowwise() %>%
     mutate(MTR = LTR * MTR,
            UTR = MTR * UTR,
-           TUCH = UTR * TUCH,
-           TPJ = TUCH * TPJ) %>%
-    rename(TUCH = TUCH) %>%
+           TUCH = UTR * TUCH#,
+           #TPJ = TUCH * TPJ
+           ) %>%
+    #rename(TUCH = TUCH) %>%
     mutate_at(vars(ACM_bb, GEORGC, ASOTIC),
               funs(. * ACM)) %>%
     mutate(ACB = ASOTIC * ACB) %>%

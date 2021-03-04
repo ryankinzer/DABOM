@@ -58,9 +58,9 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   z_tuch_init = dabom_list$Tucannon %>%
     select(TUCH) %>%
     apply(1, max)
-  z_tpj_init = dabom_list$Tucannon %>%
-    select(TPJB0, TPJA0) %>%
-    apply(1, max)
+  # z_tpj_init = dabom_list$Tucannon %>%
+  #   select(TPJB0, TPJA0) %>%
+  #   apply(1, max)
 
   # Asotin
   a_Aso_init[,ncol(a_Aso_init)] = 1 - apply(dabom_list$Asotin, 1, max, na.rm = T) # not in Asotin
@@ -476,7 +476,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
           lapply(list(z_mtr = z_mtr_init,
                       z_utr = z_utr_init,
                       z_tuch = z_tuch_init,
-                      z_tpj = z_tpj_init,
+                      #z_tpj = z_tpj_init,
                       z_acb = z_acb_init,
                       z_web = z_web_init,
                       z_efpw = z_efpw_init,
