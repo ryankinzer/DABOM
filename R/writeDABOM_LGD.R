@@ -393,8 +393,8 @@ model{
     Asotin[i,8] ~ dbern(CCAA0_p * catexp_AsoUp[i,2])
 
     # AFC
-    Asotin[i,9] ~ dbern(AFCB0_p * catexp_AsoUp[i,3])
-    Asotin[i,10] ~ dbern(AFCA0_p * catexp_AsoUp[i,3])
+    #Asotin[i,9] ~ dbern(AFCB0_p * catexp_AsoUp[i,3])
+    Asotin[i,9] ~ dbern(AFCA0_p * catexp_AsoUp[i,3])
 
   } # ends the ifish loop started at the top of this section
 
@@ -961,7 +961,7 @@ model{
   # upstream migration parameters
   phi_lakec ~ dbeta(1,1)
   #phi_johnsc ~ dbeta(1,1)
-  phi_str ~ dbeta(1,1)
+  #phi_str ~ dbeta(1,1)
 
   # set up a matrix that deals with yes/no in the tributary or not
   pMat_ESS[1,1:n.pops.SFS[2]] <- zero_vec[1:(n.pops.SFS[2])] # when not in trib, 0 prob of being in sub areas
@@ -988,7 +988,7 @@ model{
     # on/off for whether fish moved to end of each branch
     z_lakec[i] ~ dbern(catexp_SFS[i,2] * phi_lakec)
     #z_johnsc[i] ~ dbern(catexp_SFS[i,3] * phi_johnsc)
-    z_str[i] ~ dbern(catexp_SFS[i,4] * phi_str)
+    #z_str[i] ~ dbern(catexp_SFS[i,4] * phi_str)
 
     #------------------------------------
     # OBSERVATION part in South Fork Salmon
@@ -1014,7 +1014,7 @@ model{
     # Krassel Creek array (KRS)
     SFSalmon[i,10] ~ dbern( KRS_p * catexp_SFS[i, 4] )
     # upstream of KRS, at McCall hatchery (STR)
-    SFSalmon[i,11] ~ dbern( STR_p * z_str[i] )
+    #SFSalmon[i,11] ~ dbern( STR_p * z_str[i] )
 
   } #ends the ifish loop started at the top of this section
 

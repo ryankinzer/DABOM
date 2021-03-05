@@ -307,7 +307,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
     apply(1, max)
   # KRS
   a_SFS_init[,4] = dabom_list$SFSalmon %>%
-    select(KRS, STR) %>%
+    select(KRS) %>%
     apply(1, max)
   # SF Salmon bb
   a_SFS_init[,1] = ifelse(apply(a_SFS_init[,-1], 1, max) == 0,
@@ -332,9 +332,10 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   # z_johnsc_init = dabom_list$SFSalmon %>%
   #   select(JOHNSC) %>%
   #   apply(1, max)
-  z_str_init = dabom_list$SFSalmon %>%
-    select(STR) %>%
-    apply(1, max)
+
+  # z_str_init = dabom_list$SFSalmon %>%
+  #   select(STR) %>%
+  #   apply(1, max)
 
   # Lower Lemhi
   a_LowLem_init[,ncol(a_LowLem_init)] = 1 - apply(dabom_list$Lemhi, 1, max, na.rm = T) # not in Lemhi
@@ -494,7 +495,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
                       z_ccw = z_ccw_init,
                       z_lakec = z_lakec_init,
                       #z_johnsc = z_johnsc_init,
-                      z_str = z_str_init,
+                      #z_str = z_str_init,
                       z_usi = z_usi_init),
                  as.vector))
 
