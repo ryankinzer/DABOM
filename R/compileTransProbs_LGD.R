@@ -84,8 +84,9 @@ compileTransProbs_LGD = function(dabom_mod = NULL,
               funs(. * WR1)) %>%
     mutate_at(vars(LOSTIW, WALH),
               funs(. * WR2)) %>%
-    mutate_at(vars(UGR_bb, CATHEW, GRANDW),
+    mutate_at(vars(UGR_bb, CCU, UGS),
               funs(. * UGR)) %>%
+    mutate(CCW = CCU * CCW) %>%
     mutate_at(vars(SFG_bb, ZEN, ESS, KRS),
               funs(. * SFG)) %>%
     mutate_at(vars(ESS_bb, JOHNSC, YPP),

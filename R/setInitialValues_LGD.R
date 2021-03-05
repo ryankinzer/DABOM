@@ -144,7 +144,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   a_HLM_init[,ncol(a_HLM_init)] = abs(a_Pot_init[,4]-1) # not above HLM
   # POTREF
   a_HLM_init[,2] = dabom_list$Potlatch %>%
-    select(POTREF) %>%
+    select(POTREF, EFPW, EPRB0, EPRA0) %>%
     apply(1, max)
   # POTRWF
   a_HLM_init[,3] = dabom_list$Potlatch %>%
@@ -206,10 +206,16 @@ setInitialValues_LGD = function(dabom_list = NULL) {
 
   # Grande Ronde
   a_UGR_init[,ncol(a_UGR_init)] = 1 - apply(dabom_list$GrandeRonde, 1, max, na.rm = T) # not in Grande Ronde
+
   # Catherine Creek
   a_UGR_init[,2] = dabom_list$GrandeRonde %>%
+    select(CCUB0:CATHEW) %>%
+    apply(1, max)
+
+  z_ccw_init = dabom_list$GrandeRonde %>%
     select(CCWB0:CATHEW) %>%
     apply(1, max)
+
   # Grande Ronde weir
   a_UGR_init[,3] = dabom_list$GrandeRonde %>%
     select(GRANDW, UGSB0, UGSA0) %>%
@@ -251,7 +257,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
     apply(1, max)
   # GCM
   a_ImnUp_init[,3] = dabom_list$ImnahaRiver %>%
-    select(GCMB0, BCMA0) %>%
+    select(GCMB0, GCMA0) %>%
     apply(1, max)
   # CZY
   a_ImnUp_init[,4] = dabom_list$ImnahaRiver %>%
@@ -485,6 +491,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
                       z_fistrp = z_fistrp_init,
                       z_iml = z_iml_init,
                       z_ir5 = z_ir5_init,
+                      z_ccw = z_ccw_init,
                       z_lakec = z_lakec_init,
                       #z_johnsc = z_johnsc_init,
                       z_str = z_str_init,
