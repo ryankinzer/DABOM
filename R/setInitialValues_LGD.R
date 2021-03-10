@@ -191,7 +191,7 @@ setInitialValues_LGD = function(dabom_list = NULL) {
   a_Wal_init[,1] = ifelse(apply(a_Wal_init[,-1], 1, max) == 0,
                           1, 0)
   # Upper Wallowa
-  a_WalUp_init[,ncol(a_WalUp_init)] = abs(a_Wal_init[,3]-1) # not in upper wallowa
+  a_WalUp_init[,ncol(a_WalUp_init)] = abs(a_Wal_init[,4]-1) # not in upper wallowa
   # LOSTIW
   a_WalUp_init[,2] = dabom_list$Wallowa %>%
     select(LOSTIW) %>%

@@ -62,7 +62,7 @@ model{
   JUL_p ~ dbeta(1,1)
   HLMA0_p ~ dbeta(1,1)
   HLMB0_p ~ dbeta(1,1)
-  POTREF_p <- 1 # assume perfect detection
+  POTREF_p <- dbeta(1,1) # 1 assume perfect detection
   EFPW_p ~ dbeta(1,1)
   EPRB0_p ~ dbeta(1,1)
   EPRA0_p ~ dbeta(1,1)
@@ -469,9 +469,6 @@ model{
   pMat_Potlatch[2,1:n.pops.Potlatch[1]] <- p_pop_Potlatch # when in trib, >0 probs of being in sub areas
   pMat_Potlatch[2,(n.pops.Potlatch[1]+1)] <- 0 #set the "not there" bin to prob = 0
 
-  phi_efpw ~ dbeta(1,1)  # probability of moving efpw
-  phi_epr ~ dbeta(1,1) # prob of moving past epr
-
   # 3 bins above KHS: mainstem (1), BIGBEC (2) and LBEARC (3)
 
   p_pop_KHS[1:n.pops.Potlatch[2]] ~ ddirch(khs_dirch_vec) # Dirichlet for probs for going to bins
@@ -491,6 +488,9 @@ model{
   pMat_HLM[1,(n.pops.Potlatch[3] + 1)] <- 1 #set the "not there" bin to prob = 1
   pMat_HLM[2,1:n.pops.Potlatch[3]] <- p_pop_HLM # when in trib, >0 probs of being in sub areas
   pMat_HLM[2,(n.pops.Potlatch[3] + 1)] <- 0 #set the "not there" bin to prob = 0
+
+  phi_efpw ~ dbeta(1,1)  # probability of moving efpw
+  phi_epr ~ dbeta(1,1) # prob of moving past epr
 
   for (i in 1:n.fish) {
     #------------------------------------
@@ -641,7 +641,7 @@ model{
     }
 
   # past IML (IR4 -> IML)
-  z_iml[i] ~ dbern(catexp_ImnUp[i,5] * phi_iml)
+  z_iml[i] ~ dbern(catexp_ImnUp[i,6] * phi_iml)
 
   # past IR5 (IML -> IR5)
   z_ir5[i] ~ dbern(z_iml[i] * phi_ir5)
@@ -850,7 +850,7 @@ model{
     }
 
      # above WR2
-    a_WalUp[i] ~ dcat( pMat_WalUp[(catexp_Wal[i,3]+1),1:(n.pops.Wallowa[2]+1)] ) # the row number acts as on/off switch
+    a_WalUp[i] ~ dcat( pMat_WalUp[(catexp_Wal[i,4]+1),1:(n.pops.Wallowa[2]+1)] ) # the row number acts as on/off switch
     for (j in 1:(n.pops.Wallowa[2]+1))  { # now expand the dcat into matrix of zeros and ones
       catexp_WalUp[i,j] <- equals(a_WalUp[i],j) #equals(x,y) is a test for equality, returns [1,0]
     }
@@ -906,9 +906,9 @@ model{
     for (j in 1:(n.pops.UppGR+1))  { # now expand the dcat into matrix of zeros and ones
       catexp_UGR[i,j] <- equals(a_UGR[i],j) #equals(x,y) is a test for equality, returns [1,0]
 
-    z_ccw[i] ~ dbern(catexp_UGR[i,2] * phi_ccw)
-
     }
+
+    z_ccw[i] ~ dbern(catexp_UGR[i,2] * phi_ccw)
 
     #------------------------------------
     # OBSERVATION part in Upper Grande Ronde
